@@ -40,6 +40,9 @@ public class Account {
         }
        balance= balance.subtract(amount);
     }
+    protected void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
     @Override
     public String toString(){
         return "Account details: Account Id-"+ accountId+" Userdetails- "+owner.getName()+" Balance- "+balance+" Currency- "+currency;
