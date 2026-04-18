@@ -6,14 +6,13 @@ public class CurrentAccount extends Account{
         super(accountId, owner, currency);
         this.overdraftLimit=overdraftLimit;
     }
+    @Override
     public void withdraw(BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            System.out.println("Invalid Withdrawal Amount");
-            return;
+           throw new InvalidTransactionException("Invalid Withdrawal Amount");
         }
         if (getBalance().subtract(amount).compareTo(overdraftLimit.negate()) < 0) {
-            System.out.println("Overdraft limit exceeded");
-            return;
+            throw new InsufficientBalanceException("Overdraft limit exceeded");
         }
         setBalance(getBalance().subtract(amount));
     }

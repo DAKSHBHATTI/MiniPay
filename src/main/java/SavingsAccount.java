@@ -6,14 +6,14 @@ public class SavingsAccount extends Account {
         super(accountId, owner, currency);
         this.minimumBalance=minimumBalance;
     }
+    @Override
     public void withdraw(BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            System.out.println("Invalid Withdrawal Amount");
-            return;
+            throw new InvalidTransactionException("Invalid Withdrawal Amount");
         }
         if ((getBalance().subtract(amount)).compareTo(minimumBalance) < 0) {
-            System.out.println("Cannot withdraw - minimum balance must be maintained");
-            return;
+            throw new InsufficientBalanceException( "Cannot withdraw " + amount + " - would breach minimum balance of " + minimumBalance +
+                    ". Current balance: " + getBalance());
         }
         setBalance(getBalance().subtract(amount));
     }

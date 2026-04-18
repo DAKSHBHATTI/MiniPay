@@ -24,19 +24,16 @@ public class Account {
     }
     public void deposit(BigDecimal amount){
         if(amount.compareTo(BigDecimal.ZERO)<=0) {
-            System.out.println("Invalid Deposit Amount");
-            return;
+            throw new InvalidTransactionException("Deposit amount must be positive, received: " + amount);
         }
          balance=balance.add(amount);
     }
     public void withdraw(BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            System.out.println("Invalid Withdrawal Amount");
-            return;
+            throw new InvalidTransactionException("Withdrawal amount must be positive,received: "+amount);
         }
         if (balance.compareTo(amount) < 0) {
-            System.out.println("Insufficient Balance");
-            return;
+           throw new InsufficientBalanceException("Insufficient balance: have " + balance + ", need " + amount);
         }
        balance= balance.subtract(amount);
     }
