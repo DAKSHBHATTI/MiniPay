@@ -18,13 +18,8 @@ public class PaymentController {
     private PaymentService paymentService;
 @PostMapping("/transfer")
     public ResponseEntity<String>transferMoney(@RequestBody TransferRequest request){
-    try{
         paymentService.transferMoney(request.getFromAccountId(), request.getToAccountId(), request.getAmount());
         return ResponseEntity.ok("Transfer Successful");
-    }
-    catch(InsufficientBalanceException  | InvalidTransactionException e){
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
 }
     @GetMapping("/history/{accountId}")
     public ResponseEntity<List<Transaction>>getTransactionHistory(@PathVariable  long accountId){
