@@ -14,20 +14,16 @@ import java.util.stream.Collectors;
 public class PaymentService {
 
     // fields
-    private Map<Long, User> users;
+
     private Map<Long, Account> accounts;
     private List<Transaction> transactions;
     private long transactionCounter;
 
     // constructor — initialise with empty collections
     public PaymentService() {
-        this.users = new HashMap<>();
         this.accounts = new HashMap<>();
         this.transactions = new ArrayList<>();
         this.transactionCounter = 1;
-    }
-    public void registerUser(User user){
-        users.put(user.getUserId(),user);
     }
     public void addAccount(Account account){
         accounts.put(account.getAccountId(),account);
